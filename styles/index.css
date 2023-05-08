@@ -1,0 +1,42 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h2,
+h3,
+p,
+a,
+button,
+div,
+input {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  background: none;
+  border: none;
+}
+
+.expenses {
+  max-width: 882px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  row-gap: 28px;
+  justify-content: center;
+}
+
+.expenses__header {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+}
