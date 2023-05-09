@@ -31,6 +31,10 @@ input {
   padding: 0 15px;
 }
 
+.value-container {
+  font-weight: initial;
+}
+
 .expenses {
   width: calc(100% - 30px);
   max-width: 882px;
@@ -97,13 +101,20 @@ input {
   justify-content: flex-start;
 }
 
-.expenses__limit-header {
+.expenses__limit {
   margin-top: 8px;
   margin-bottom: 13px;
 }
 
-.expenses__total-header {
+.expenses__total {
   margin-bottom: 35px;
+}
+
+.expenses__status {
+  color: green;
+}
+.expenses__status_bad {
+  color: red;
 }
 
 .expenses__history {
