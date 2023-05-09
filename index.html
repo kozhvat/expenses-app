@@ -16,8 +16,39 @@
     <title>Расходы</title>
   </head>
   <body>
-    <section class="expenses">
+    <section class="expenses container">
       <h1 class="expenses__header">Учет расходов</h1>
+      <div class="expenses__input-container">
+        <input
+          data-find="input"
+          class="expenses__input"
+          type="number"
+          placeholder="руб."
+        />
+        <button data-find="button" class="expenses__button">Добавить</button>
+      </div>
+      <div class="expenses__features">
+        <div class="expenses__features-left">
+          <div class="expenses__limit">
+            <h2 class="expenses__limit-header feature-header">Лимит:</h2>
+          </div>
+          <div class="expenses__total">
+            <h2 class="expenses__total-header feature-header">Всего:</h2>
+          </div>
+          <div class="expenses__status">
+            <h2 class="expenses__status-header feature-header">Статус:</h2>
+          </div>
+        </div>
+        <div class="expenses__features-right">
+          <div class="expenses__history">
+            <h2 class="expenses__history-header feature-header">История:</h2>
+            <div
+              data-find="history"
+              class="expenses__history-list-container"
+            ></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="./scripts/index.js"></script>
