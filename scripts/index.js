@@ -1,48 +1,96 @@
-const expenses = [];
+const LIMIT = 10000;
+const CURRENCY = ' руб.';
+const STATUS_IN_LIMIT = 'все хорошо';
+const STATUS_OUT_OF_LIMIT = 'все плохо';
+const STATUS_IN_LIMIT_CLASSNAME = 'expenses__status_bad';
+
 const inputNode = document.querySelector('[data-find="input"]');
 const buttonNode = document.querySelector('[data-find="button"]');
-const LIMIT = 10000;
 const limitNode = document.querySelector('[data-find="limit"]');
 const sumNode = document.querySelector('[data-find="sum"]');
 const statusNode = document.querySelector('[data-find="status"]');
 const historyNode = document.querySelector('[data-find="history"]');
-limitNode.innerText = `${LIMIT} руб.`;
-statusNode.innerText = 'все хорошо';
+
+const expenses = [];
+
+init(expenses);
 
 buttonNode.addEventListener('click', function () {
-  // Получаем значение из поля ввода
-  if (!inputNode.value) {
+  const expense = getExpenseFromUser();
+
+  if (!expense || expense < 0) {
     return;
   }
-  const expense = parseInt(inputNode.value);
-  inputNode.value = '';
 
-  // Сохраняем трату в список
+  trackExpense(expense);
+
+  render(expenses);
+});
+
+function init(expenses) {
+  limitNode.innerText = LIMIT + CURRENCY;
+  statusNode.innerText = STATUS_IN_LIMIT;
+  sumNode.innerText = calculateExpenses(expenses) + CURRENCY;
+}
+
+function trackExpense(expense) {
   expenses.push(expense);
+}
 
-  // Выведем новый список трат
-  let expensesListHTML = '';
-  expenses.forEach((element) => {
-    expensesListHTML += `<li class="expenses__history-item">${element} руб.</li>`;
-  });
+function getExpenseFromUser() {
+  if (!inputNode.value) {
+    return null;
+  }
 
-  historyNode.innerHTML = `<ol class="expenses__history-list">${expensesListHTML}</ol>`;
+  const expense = parseInt(inputNode.value);
 
-  // Посчитать сумму и вывести её
+  clearInput();
+
+  return expense;
+}
+
+function clearInput() {
+  inputNode.value = '';
+}
+
+function calculateExpenses(expenses) {
   let sum = 0;
 
   expenses.forEach((element) => {
-    sum += parseInt(`${element} руб.`);
+    sum += element;
+  });
+  return sum;
+}
+
+function render(expenses) {
+  const sum = calculateExpenses(expenses);
+
+  renderHistory(expenses);
+  renderSum(sum);
+  renderStatus(sum);
+}
+
+function renderHistory(expenses) {
+  let expensesListHTML = '';
+  expenses.forEach((element) => {
+    expensesListHTML += `<li class="expenses__history-item">${
+      element + CURRENCY
+    }</li>`;
   });
 
-  sumNode.innerText = sum;
+  historyNode.innerHTML = `<ol class="expenses__history-list">${expensesListHTML}</ol>`;
+}
 
-  // Сравнить сумму с лимитом и вывести статус
+function renderSum(sum) {
+  sumNode.innerHTML = `${sum + CURRENCY}`;
+}
+
+function renderStatus(sum) {
   if (sum <= LIMIT) {
-    statusNode.innerHTML = 'все хорошо';
-    statusNode.classList.remove('expenses__status_bad');
+    statusNode.innerHTML = STATUS_IN_LIMIT;
+    statusNode.classList.remove(STATUS_IN_LIMIT_CLASSNAME);
   } else {
-    statusNode.innerHTML = 'все плохо';
-    statusNode.classList.add('expenses__status_bad');
+    statusNode.innerHTML = STATUS_OUT_OF_LIMIT;
+    statusNode.classList.add(STATUS_IN_LIMIT_CLASSNAME);
   }
-});
+}
