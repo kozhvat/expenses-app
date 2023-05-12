@@ -1,11 +1,4 @@
-body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+@import url(./popup.css);
 
 h1,
 h2,
@@ -14,7 +7,8 @@ p,
 a,
 button,
 div,
-input {
+input,
+select {
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -22,12 +16,94 @@ input {
   font-family: 'Inter', sans-serif;
   font-size: 32px;
   line-height: 39px;
-  font-weight: 400;
   background: none;
   border: none;
 }
 
+.expenses,
+.top-container,
+.features-left,
+.features-right,
+.input-container,
+.expenses__button-add-expense,
+.expenses__limit,
+.expenses__features,
+.expenses__button-reset,
+.pupup__button-change-limit {
+  display: flex;
+}
+
+.features-left,
+.features-right,
+.expenses {
+  flex-direction: column;
+}
+
+.expenses__button-add-expense,
+.expenses__button-reset,
+.expenses__limit-change,
+.expenses__select-category,
+.pupup__button-change-limit {
+  cursor: pointer;
+}
+
+.expenses__input-add-expense,
+.expenses__button-add-expense,
+.expenses__select-category,
+.expenses__button-reset,
+.popup__input-change-limit,
+.pupup__button-change-limit {
+  min-height: 58px;
+}
+
+.input-container,
+.expenses__features {
+  column-gap: 28px;
+  row-gap: 18px;
+  justify-content: space-between;
+}
+
+.top-container {
+  column-gap: 28px;
+}
+
+.expenses__header,
+.feature-header,
+.popup__header {
+  font-weight: 700;
+}
+
+.features-left,
+.expenses__button-reset,
+.expenses__input {
+  width: 100%;
+  max-width: 484px;
+}
+
+.expenses__button-add-expense,
+.expenses__button-reset,
+.pupup__button-change-limit {
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.features-right,
+.expenses__button-add-expense,
+.pupup__button-change-limit {
+  width: calc(100% - 28px);
+  max-width: 370px;
+}
+
+.expenses__button-add-expense:active,
+.expenses__button-reset:active,
+.pupup__button-change-limit:active {
+  box-shadow: inset 0 0 50px darkslategrey;
+}
+
 .container {
+  margin: auto;
   padding: 0 15px;
 }
 
@@ -36,35 +112,48 @@ input {
 }
 
 .expenses {
+  padding-top: 67px;
   width: calc(100% - 30px);
   max-width: 882px;
-  display: flex;
-  flex-direction: column;
   row-gap: 41px;
   justify-content: center;
 }
 
-.expenses__header,
-.feature-header {
-  font-weight: 700;
+.expenses__select-category {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.expenses__input-container,
-.expenses__features {
-  display: flex;
-  flex-direction: row;
-  column-gap: 28px;
-  row-gap: 43px;
-  justify-content: space-between;
+.expenses__select-category::-ms-expand {
+  display: none;
 }
 
-.expenses__input-container {
-  height: 58px;
+.expenses__select-category-wrapper {
+  position: relative;
+}
+
+.expenses__select-category-wrapper::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  border: solid 10px transparent;
+  width: 18px;
+  height: 15px;
+  background: url(../resources/img/select.png) 0 0 / cover no-repeat;
+  pointer-events: none;
 }
 
 .expenses__input {
   padding: 10px 15px;
   border: 1px solid #000000;
+}
+
+.select-input {
+  padding: 10px 40px 10px 15px;
 }
 
 .expenses__input:focus-visible {
@@ -76,38 +165,34 @@ input {
   color: #000000;
 }
 
-.expenses__input,
-.expenses__features-left {
-  width: calc(100% - 14px);
-  max-width: 484px;
-}
-
-.expenses__button,
-.expenses__features-right {
-  width: calc(100% - 14px);
-  max-width: 370px;
-}
-
-.expenses__button {
-  color: #ffffff;
+.blue-button {
+  align-self: flex-start;
   background: #0094ff;
-  cursor: pointer;
-}
-
-.expenses__features-left,
-.expenses__features-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .expenses__limit {
-  margin-top: 8px;
   margin-bottom: 13px;
+  flex-wrap: wrap;
+  column-gap: 12px;
 }
 
-.expenses__total {
+.expenses__limit-header {
+  margin-top: 8px;
+}
+
+.expenses__limit-change {
+  margin-right: 10px;
+  width: 42px;
+  height: 42px;
+  background: url(../resources/img/limit.png) 0 0 / cover no-repeat;
+}
+
+.expenses__sum {
   margin-bottom: 35px;
+}
+
+.expenses__status-container {
+  margin-bottom: 112px;
 }
 
 .expenses__status {
@@ -115,6 +200,10 @@ input {
 }
 .expenses__status_bad {
   color: red;
+}
+
+.orange-button {
+  background: #ff0000;
 }
 
 .expenses__history {
@@ -126,9 +215,9 @@ input {
 }
 
 .expenses__history-list-container {
-  height: fit-content;
-  max-height: 390px;
+  max-height: 284px;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .expenses__history-list {

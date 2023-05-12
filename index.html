@@ -18,17 +18,40 @@
   <body>
     <section class="expenses container">
       <h1 class="expenses__header">Учет расходов</h1>
-      <div class="expenses__input-container">
-        <input
-          data-find="input"
-          class="expenses__input"
-          type="number"
-          placeholder="руб."
-        />
-        <button data-find="button" class="expenses__button">Добавить</button>
+      <div class="expenses__top-container top-container">
+        <div class="expenses__input-container input-container features-left">
+          <input
+            data-find="input-add-expense"
+            class="expenses__input-add-expense expenses__input"
+            type="number"
+            placeholder="руб."
+          />
+          <div class="expenses__select-category-wrapper">
+            <select
+              data-find="category"
+              class="expenses__select-category expenses__input select-input"
+              name="category"
+              id="category"
+            >
+              <option value="category1">категория1</option>
+              <option value="category2">категория2</option>
+              <option value="category3">категория3</option>
+              <option value="category4">категория4</option>
+              <option value="category5">категория5</option>
+              <option value="category6">категория6</option>
+            </select>
+          </div>
+        </div>
+        <button
+          data-find="button-add-expense"
+          class="expenses__button-add-expense blue-button"
+        >
+          Добавить
+        </button>
       </div>
+
       <div class="expenses__features">
-        <div class="expenses__features-left">
+        <div class="features-left">
           <div class="expenses__limit">
             <h2 class="expenses__limit-header feature-header">
               Лимит:
@@ -37,6 +60,10 @@
                 class="expenses__limit-value-container value-container"
               ></span>
             </h2>
+            <button
+              data-find="button-open-change-limit"
+              class="expenses__limit-change"
+            ></button>
           </div>
           <div class="expenses__sum">
             <h2 class="expenses__sum-header feature-header">
@@ -56,8 +83,11 @@
               ></span>
             </h2>
           </div>
+          <button class="expenses__button-reset features-left orange-button">
+            Сбросить расходы
+          </button>
         </div>
-        <div class="expenses__features-right">
+        <div class="expenses__features-right features-right">
           <div class="expenses__history">
             <h2 class="expenses__history-header feature-header">История:</h2>
             <div
@@ -68,7 +98,32 @@
         </div>
       </div>
     </section>
-
+    <div data-find="popup" class="popup">
+      <div data-find="popup__content" class="popup__content">
+        <div data-find="popup__close-btn" class="popup__close-btn"></div>
+        <h2 class="popup__header feature-header">Новый лимит</h2>
+        <div class="popup__top-container top-container">
+          <div
+            data-find="popup"
+            class="popup__input-container input-container features-left"
+          >
+            <input
+              data-find="input-change-limit"
+              class="popup__input-change-limit features-left expenses__input"
+              type="number"
+              placeholder="руб."
+            />
+          </div>
+          <button
+            data-find="button-change-limit"
+            class="pupup__button-change-limit features-right blue-button"
+          >
+            Задать лимит
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./scripts/popup.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

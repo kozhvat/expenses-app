@@ -3,9 +3,12 @@ const CURRENCY = ' руб.';
 const STATUS_IN_LIMIT = 'все хорошо';
 const STATUS_OUT_OF_LIMIT = 'все плохо';
 const STATUS_IN_LIMIT_CLASSNAME = 'expenses__status_bad';
+const HISTORY = 'Трат нет';
 
-const inputNode = document.querySelector('[data-find="input"]');
-const buttonNode = document.querySelector('[data-find="button"]');
+const inputNode = document.querySelector('[data-find="input-add-expense"]');
+const buttonAddNode = document.querySelector(
+  '[data-find="button-add-expense"]'
+);
 const limitNode = document.querySelector('[data-find="limit"]');
 const sumNode = document.querySelector('[data-find="sum"]');
 const statusNode = document.querySelector('[data-find="status"]');
@@ -15,7 +18,7 @@ const expenses = [];
 
 init(expenses);
 
-buttonNode.addEventListener('click', function () {
+buttonAddNode.addEventListener('click', function () {
   const expense = getExpenseFromUser();
 
   if (!expense || expense < 0) {
@@ -31,6 +34,7 @@ function init(expenses) {
   limitNode.innerText = LIMIT + CURRENCY;
   statusNode.innerText = STATUS_IN_LIMIT;
   sumNode.innerText = calculateExpenses(expenses) + CURRENCY;
+  historyNode.innerText = HISTORY;
 }
 
 function trackExpense(expense) {
