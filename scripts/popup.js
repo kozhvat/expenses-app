@@ -11,8 +11,15 @@ const popupBtnCloseNode = document.querySelector(
   '[data-find="popup__close-btn"]'
 );
 
-popupBtnOpenNode.addEventListener('click', togglePopup);
-popupBtnCloseNode.addEventListener('click', togglePopup);
+//
+
+//
+
+//
+
+//
+
+popup();
 
 popupNode.addEventListener('click', (event) => {
   const isClickOutsideContent = !event
@@ -22,7 +29,13 @@ popupNode.addEventListener('click', (event) => {
   if (isClickOutsideContent) {
     togglePopup();
   }
+  clearLimitInput();
 });
+
+function popup() {
+  popupBtnOpenNode.addEventListener('click', togglePopup);
+  popupBtnCloseNode.addEventListener('click', togglePopup);
+}
 
 function togglePopup() {
   popupNode.classList.toggle(POPUP_OPENED_CLASSNAME);

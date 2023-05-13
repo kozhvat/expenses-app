@@ -1,13 +1,20 @@
-const LIMIT = 10000;
+let LIMIT = 10000;
+let sum = '';
 const CURRENCY = ' руб.';
+let whatMinus = '';
 const STATUS_IN_LIMIT = 'все хорошо';
 const STATUS_OUT_OF_LIMIT = 'все плохо';
-const STATUS_IN_LIMIT_CLASSNAME = 'expenses__status_bad';
+const STATUS_OUT_OF_LIMIT_CLASSNAME = 'expenses__status_bad';
 const HISTORY = 'Трат нет';
 
-const inputNode = document.querySelector('[data-find="input-add-expense"]');
-const buttonAddNode = document.querySelector(
+const inputAddExpenseNode = document.querySelector(
+  '[data-find="input-add-expense"]'
+);
+const buttonAddExpenseNode = document.querySelector(
   '[data-find="button-add-expense"]'
+);
+const buttonResetExpensesNode = document.querySelector(
+  '[data-find="button-reset-expenses"]'
 );
 const limitNode = document.querySelector('[data-find="limit"]');
 const sumNode = document.querySelector('[data-find="sum"]');
@@ -18,7 +25,7 @@ const expenses = [];
 
 init(expenses);
 
-buttonAddNode.addEventListener('click', function () {
+buttonAddExpenseNode.addEventListener('click', function () {
   const expense = getExpenseFromUser();
 
   if (!expense || expense < 0) {
@@ -42,11 +49,11 @@ function trackExpense(expense) {
 }
 
 function getExpenseFromUser() {
-  if (!inputNode.value) {
+  if (!inputAddExpenseNode.value) {
     return null;
   }
 
-  const expense = parseInt(inputNode.value);
+  const expense = parseInt(inputAddExpenseNode.value);
 
   clearInput();
 
@@ -54,11 +61,11 @@ function getExpenseFromUser() {
 }
 
 function clearInput() {
-  inputNode.value = '';
+  inputAddExpenseNode.value = '';
 }
 
 function calculateExpenses(expenses) {
-  let sum = 0;
+  sum = 0;
 
   expenses.forEach((element) => {
     sum += element;
@@ -67,7 +74,7 @@ function calculateExpenses(expenses) {
 }
 
 function render(expenses) {
-  const sum = calculateExpenses(expenses);
+  sum = calculateExpenses(expenses);
 
   renderHistory(expenses);
   renderSum(sum);
@@ -92,9 +99,80 @@ function renderSum(sum) {
 function renderStatus(sum) {
   if (sum <= LIMIT) {
     statusNode.innerHTML = STATUS_IN_LIMIT;
-    statusNode.classList.remove(STATUS_IN_LIMIT_CLASSNAME);
+    statusNode.classList.remove(STATUS_OUT_OF_LIMIT_CLASSNAME);
   } else {
-    statusNode.innerHTML = STATUS_OUT_OF_LIMIT;
-    statusNode.classList.add(STATUS_IN_LIMIT_CLASSNAME);
+    whatMinus = ` (-${sum - LIMIT + CURRENCY})`;
+    statusNode.innerHTML = `${STATUS_OUT_OF_LIMIT + whatMinus}`;
+    statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASSNAME);
   }
+}
+
+buttonResetExpensesNode.addEventListener('click', function () {
+  resetExpenses(expenses);
+
+  render(expenses);
+
+  init(expenses);
+});
+
+function resetExpenses(expenses) {
+  expenses.splice(0, expenses.length);
+}
+
+//
+
+//
+
+//
+
+//
+
+//
+const inputChangeNode = document.querySelector(
+  '[data-find="input-change-limit"]'
+);
+const buttonChangeLimitNode = document.querySelector(
+  '[data-find="button-change-limit"]'
+);
+
+renderNewLimit(sum);
+
+buttonChangeLimitNode.addEventListener('click', function () {
+  const newLimit = getNewLimitFromUser();
+
+  if (!newLimit || newLimit < 0) {
+    return;
+  }
+
+  trackNewLimit(newLimit);
+
+  renderNewLimit(newLimit);
+
+  renderStatus(sum);
+
+  togglePopup();
+});
+
+function trackNewLimit(newLimit) {
+  LIMIT = newLimit;
+}
+
+function getNewLimitFromUser() {
+  if (!inputChangeNode.value) {
+    return null;
+  }
+
+  const newLimit = parseInt(inputChangeNode.value);
+
+  clearLimitInput();
+
+  return newLimit;
+}
+
+function clearLimitInput() {
+  inputChangeNode.value = '';
+}
+
+function renderNewLimit() {
+  limitNode.innerText = LIMIT + CURRENCY;
 }
