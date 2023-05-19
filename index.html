@@ -28,17 +28,23 @@
           />
           <div class="expenses__select-category-wrapper">
             <select
-              data-find="category"
+              data-find="input-add-category"
               class="expenses__select-category expenses__input select-input"
               name="category"
               id="category"
             >
-              <option value="category1">категория1</option>
-              <option value="category2">категория2</option>
-              <option value="category3">категория3</option>
-              <option value="category4">категория4</option>
-              <option value="category5">категория5</option>
-              <option value="category6">категория6</option>
+              <option hidden disabled selected value="Выберите категорию">
+                Выберите категорию
+              </option>
+              <option value="Еда и напитки">Еда и напитки</option>
+              <option value="Жильё">Жильё (жкх, ипотека и пр.)</option>
+              <option value="Транспорт">Транспорт (своё авто и др.)</option>
+              <option value="Образование">Образование, саморазвитие</option>
+              <option value="Здоровье, красота">Здоровье, красота</option>
+              <option value="Развлечения">Развлечения</option>
+              <option value="Спорт">Спорт</option>
+              <option value="Связь, интернет">Связь, интернет</option>
+              <option value="Всё для дома">Всё для дома</option>
             </select>
           </div>
         </div>
@@ -58,19 +64,20 @@
               <span
                 data-find="limit"
                 class="expenses__limit-value-container value-container"
-              ></span>
+                >10000</span
+              >
             </h2>
             <button
               data-find="button-open-change-limit"
               class="expenses__limit-change"
             ></button>
           </div>
-          <div class="expenses__sum">
-            <h2 class="expenses__sum-header feature-header">
+          <div class="expenses__total">
+            <h2 class="expenses__total-header feature-header">
               Всего:
               <span
-                data-find="sum"
-                class="expenses__sum-value-container value-container"
+                data-find="total"
+                class="expenses__total-value-container value-container"
               ></span>
             </h2>
           </div>
@@ -93,10 +100,7 @@
         <div class="expenses__features-right features-right">
           <div class="expenses__history">
             <h2 class="expenses__history-header feature-header">История:</h2>
-            <div
-              data-find="history"
-              class="expenses__history-list-container"
-            ></div>
+            <ol data-find="history" class="expenses__history-list"></ol>
           </div>
         </div>
       </div>
@@ -126,8 +130,8 @@
         </div>
       </div>
     </div>
-    <script src="./scripts/index.js"></script>
-    <!-- <script src="./scripts/index_copy.js"></script> -->
+    <!-- <script src="./scripts/index.js"></script> -->
+    <script src="./scripts/index_copy.js"></script>
     <script src="./scripts/popup.js"></script>
   </body>
 </html>

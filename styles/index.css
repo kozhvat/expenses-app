@@ -187,7 +187,7 @@ select {
   background: url(../resources/img/limit.png) 0 0 / cover no-repeat;
 }
 
-.expenses__sum {
+.expenses__total {
   margin-bottom: 35px;
 }
 
@@ -214,14 +214,15 @@ select {
   margin-bottom: 20px;
 }
 
-.expenses__history-list-container {
+.expenses__history-list {
+  display: block;
   max-height: 284px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
 .expenses__history-list {
-  list-style: number;
+  list-style: decimal;
   list-style-position: inside;
 }
 
