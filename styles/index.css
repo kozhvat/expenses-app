@@ -229,3 +229,7 @@ select {
 .expenses__history-item {
   margin-left: 3px;
 }
+
+.expenses__history-item::marker {
+  font-weight: 700;
+}
